@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Leaflet Antimeridian Spec Runner</title>
+	<link rel="stylesheet" type="text/css" href="../node_modules/mocha/mocha.css">
+</head>
+<body>
+	<div id="mocha"></div>
+	<script src="expect.js"></script>
+	<script src="../node_modules/mocha/mocha.js"></script>
+	<script src="../node_modules/happen/happen.js"></script>
+	<script src="../node_modules/prosthetic-hand/dist/prosthetic-hand.js"></script>
+	<script src="sinon.js"></script>
+
+	<!-- source files -->
+	<script>
+		// Trick Leaflet into believing we have a touchscreen (for Chrome)
+		if (window.Touch) { window.ontouchstart = function(){} };
+	</script>
+<!-- 	<script src="../build/deps.js"></script> -->
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+	<script src="../debug/leaflet.antimeridian-include.js"></script>
+
+	<script>
+		mocha.setup({
+			ui: 'bdd',
+			ignoreLeaks: true
+		});
+	</script>
+
+	<!-- spec files -->
+
+	<script src="SpecHelper.js"></script>
+
+	<!-- /Wrapping -->
+	<script src="vector/Polyline.WrappedSpec.js"></script>
+	<script src="vector/Polygon.WrappedSpec.js"></script>
+
+	<script>
+		(window.mochaPhantomJS || window.mocha).run();
+	</script>
+</body>
+</html>
