@@ -1,1 +1,182 @@
-<p>Leaflet.Antimeridian offers automatic splitting and wrapping of lines around the Antimeridian (or Internation Date Line). </p>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Leaflet Antimeridian Line Wrapping Example</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="dist/leaflet.antimeridian-src.js"></script>
+</head>
+<body>
+
+    <span>A set of Polygons and a Polyline that are displayed using L.Wrapped.Polygon and L.Wrapped.Polyline from the Leaflet.Antimeridian plugin.</span>
+    <div id="map" style="width: 800px; height: 300px; border: 3px solid #ccc; margin: 10px"></div>
+    <span>A set of Polygons and a Polyline that are displayed using L.Polygon and L.Polyline from Leaflet.</span>
+    <div id="map2" style="width: 800px; height: 300px; border: 3px solid #ccc; margin: 10px;"></div>
+    <span>The same sets of points are used for both.</span>
+
+    <script>
+
+    var userLocation = new L.LatLng(0, 0);
+    var map = L.map('map').setView(userLocation, 1);
+    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 10
+    }).addTo(map);
+    var map2 = L.map('map2').setView(userLocation, 1);
+    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 10
+    }).addTo(map2);
+
+
+    var latlongs = [new L.LatLng(12, 170), new L.LatLng(12, -129), new L.LatLng(0, -129), new L.LatLng(0, 170)];
+    var latlongs2 = [new L.LatLng(14, -129), new L.LatLng(24, -129), new L.LatLng(24, 170), new L.LatLng(14, 170)];
+    var latlongs3 = [new L.LatLng(32, -129), new L.LatLng(32, 170), new L.LatLng(26, 170), new L.LatLng(26, -129)];
+    var latlongs4 = [new L.LatLng(34, 170), new L.LatLng(40, 170), new L.LatLng(40, -129), new L.LatLng(34, -129)];
+    var latlongs5 = [new L.LatLng(45, 107), new L.LatLng(50, 127), new L.LatLng(50, -127)];
+    var latlongs6 = [new L.LatLng(45, -90), new L.LatLng(50, -70), new L.LatLng(50, 90)];
+    var latlngs7 = [new L.LatLng(45, -90), new L.LatLng(50, -70), new L.LatLng(50, 90)];
+
+    new L.Wrapped.Polygon(latlongs, {
+      color: 'green',
+      opacity: 1,
+      weight: 1,
+      clickable: false
+    }).addTo(map);
+    new L.Polygon(latlongs, {
+      color: 'green',
+      opacity: 1,
+      weight: 1,
+      clickable: false
+    }).addTo(map2);
+
+    new L.Wrapped.Polygon(latlongs2, {
+      color: 'red',
+      opacity: 1,
+      weight: 1,
+      clickable: false
+    }).addTo(map);
+    new L.Polygon(latlongs2, {
+      color: 'red',
+      opacity: 1,
+      weight: 1,
+      clickable: false
+    }).addTo(map2);
+
+
+    new L.Wrapped.Polygon(latlongs3, {
+      color: 'purple',
+      opacity: 1,
+      weight: 1,
+      clickable: false
+    }).addTo(map);
+    new L.Polygon(latlongs3, {
+      color: 'purple',
+      opacity: 1,
+      weight: 1,
+      clickable: false
+    }).addTo(map2);
+
+    new L.Wrapped.Polygon(latlongs4, {
+      color: 'orange',
+      opacity: 1,
+      weight: 1,
+      clickable: false
+    }).addTo(map);
+    new L.Polygon(latlongs4, {
+      color: 'orange',
+      opacity: 1,
+      weight: 1,
+      clickable: false
+    }).addTo(map2);
+
+
+    new L.Wrapped.Polygon(latlongs5, {
+      color: 'orange',
+      opacity: 1,
+      weight: 1,
+      clickable: false
+    }).addTo(map);
+    new L.Polygon(latlongs5, {
+      color: 'orange',
+      opacity: 1,
+      weight: 1,
+      clickable: false
+    }).addTo(map2);
+
+
+    new L.Wrapped.Polygon(latlongs6, {
+      color: 'red',
+      opacity: 1,
+      weight: 1,
+      clickable: false
+    }).addTo(map);
+    new L.Polygon(latlongs6, {
+      color: 'red',
+      opacity: 1,
+      weight: 1,
+      clickable: false
+    }).addTo(map2);
+
+  new L.Wrapped.Polyline(latlngs7, {
+    color: 'blue',
+    opacity: 1,
+    weight: 1,
+    clickable: false
+  }).addTo(map);
+  new L.Polyline(latlngs7, {
+    color: 'blue',
+    opacity: 1,
+    weight: 1,
+    clickable: false
+  }).addTo(map2);
+
+  var pointA = new L.LatLng(90, 180.0);
+  var pointB = new L.LatLng(-90, 180.0);
+  var pointList = [pointA, pointB];
+  var idl = new L.polyline(pointList, {
+    color: 'green',
+    weight: 3,
+    opacity: 0.5,
+    smoothFactor: 1,
+    noWrap:false
+  });
+  idl.addTo(map);
+  idl.bindTooltip("180 Internation Date Line", {'permanent': true});
+  var idl2 = new L.polyline(pointList, {
+    color: 'green',
+    weight: 3,
+    opacity: 0.5,
+    smoothFactor: 1,
+    noWrap:false
+  });
+  idl2.addTo(map2);
+  idl2.bindTooltip("180 Internation Date Line", {'permanent': true});
+
+  var pointA2 = new L.LatLng(90, -180.0);
+  var pointB2 = new L.LatLng(-90, -180.0);
+  var pointList2 = [pointA2, pointB2];
+  var idlneg = new L.polyline(pointList2, {
+    color: 'green',
+    weight: 3,
+    opacity: 0.5,
+    smoothFactor: 1,
+    noWrap:false
+  });
+  idlneg.addTo(map);
+  idlneg.bindTooltip("-180 Internation Date Line", {'permanent': true});
+  var idlneg2 = new L.polyline(pointList2, {
+    color: 'green',
+    weight: 3,
+    opacity: 0.5,
+    smoothFactor: 1,
+    noWrap:false
+  });
+  idlneg2.addTo(map2);
+  idlneg2.bindTooltip("-180 Internation Date Line", {'permanent': true});
+
+    </script>
+</body>
+
+</html>
