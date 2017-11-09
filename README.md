@@ -1,7 +1,7 @@
 # Leaflet.Antimeridian
-A plugin to allow polygons and polylines to naturally draw across the antimeridian (or the Internation Date Line) instead of always wrapping across the Greenwich meridian.
+A plugin to allow polygons and polylines to naturally draw across the Antimeridian (or the Internation Date Line) instead of always wrapping across the Greenwich meridian.
 
-Useful when displaying lines that might cross or partially cross the antimeridian.
+Useful when displaying lines that might cross or partially cross the Antimeridian.
 
 Simple polygons/polylines without using Leaflet.Antimeridian |
 ------|
@@ -15,20 +15,28 @@ Simple polygons/polylines without using Leaflet.Antimeridian |
 ## Installation
 Requires leaflet@1.0.0.
 
-
-
 ## Usage
 
 
 ## API reference
 ### Factory
-Factory|Description
--------|-----------
-
-
-### Methods
+Polylines
 Method|Returns|Description
 ------|-------|-----------
+L.Wrapped.Polyline(`LatLng[]` _latlngs_, `options` _options?_)| `L.Wrapped.Polyline`|Create a automatically wrapping polyline that will take all the usual polygon options.
+L.wrappedPolyline(`LatLng[]` _latlngs_, `options` _options?_)| `L.Wrapped.Polyline`|Factory method that wraps the L.Wrapped.Polyline constructor.
 
+Polygons
+------|-------|-----------
+L.Wrapped.Polygon(`LatLng[]` _latlngs_, `options` _options?_)| `L.Wrapped.Polygon`|Create a automatically wrapping polygon that will take all the usual polygon options.
+L.wrappedPolygon(`LatLng[]` _latlngs_, `options` _options?_)| `L.Wrapped.Polygon`|Factory method that wraps the L.Wrapped.Polygon constructor.
+
+### Methods
+Utility Methods
+------|-------|-----------
+L.Wrapped.sign(`Number` _number_)| Returns NaN for non-numbers, 0 for 0, -1 for negative numbers, 1 for positive numbers |
+L.Wrapped.calculateAntimeridianLat(`LatLng` _latLngA_, `LatLng` _latLngB_)| `Number`|Calculates the latitude at which the two points will cross the Antimeridian. Returns the latitude.
+L.Wrapped.isCrossMeridian(`LatLng` _latLngA_, `LatLng` _latLngB_)| `boolean` | Returns true if the line between the two LatLngs crosses either meridian.
+L.Wrapped.isBreakRing(`LatLng` _latLngA_, `LatLng` _latLngB_)| `boolean` | Returns true if the line between the two LatLngs should be broken across the meridian.
 
 ## [License](https://opensource.org/licenses/MIT)
