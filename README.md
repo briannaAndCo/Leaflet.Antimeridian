@@ -22,7 +22,7 @@ Requires leaflet@1.0.0.
 ### Factorys
 Factory|Description
 ------|-------
-L.Wrapped.Polyline(`LatLng[]` _latlngs_, `options` _options?_)|Create a automatically wrapping polyline that will take all the usual polygon options.
+L.Wrapped.Polyline(`LatLng[]` _latlngs_, `options` _options?_)|Create a automatically wrapping polyline that will take all the usual polyline options.
 L.wrappedPolyline(`LatLng[]` _latlngs_, `options` _options?_)|Factory method that wraps the L.Wrapped.Polyline constructor.
 L.Wrapped.Polygon(`LatLng[]` _latlngs_, `options` _options?_)|Create a automatically wrapping polygon that will take all the usual polygon options.
 L.wrappedPolygon(`LatLng[]` _latlngs_, `options` _options?_)|Factory method that wraps the L.Wrapped.Polygon constructor.
