@@ -22,11 +22,16 @@ It may also be downloaded as an NPM project, complete with tests and examples.
 
 ### Javascript Download
 
-
+To download the source file and include in the the project, run:
+```
+git clone https://github.com/briannaAndCo/Leaflet.Antimeridian.git
+git checkout v1.0.0
+```
+A folder named `dist` will appear, with the file `leaflet.antimeridian-src.js` inside it. Include that folder in your index.html file using the paths below.
 
 ```html
 <script src="path/to/leaflet@1.0.2/dist/leaflet.js"></script>
-<script src="path/to/Leaflet.Antimeridian-src.js"></script>
+<script src="path/to/leaflet.antimeridian-src.js"></script>
 ```
 
 ## Usage
