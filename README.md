@@ -17,7 +17,48 @@ Requires leaflet@1.0.0.
 
 ## Usage
 
+This plugin may be downloaded as a single Javascript file and directly included in the project.
+It may also be downloaded as an NPM project, complete with tests and examples.
 
+### Javascript Download
+
+
+
+```html
+<script src="path/to/leaflet@1.0.2/dist/leaflet.js"></script>
+<script src="path/to/Leaflet.Antimeridian-src.js"></script>
+```
+
+## Usage
+To create a L.Wrapped.Polyline or L.Wrapped.Polygon, simply pass an array of latlngs to the factory function or the constructor as the first argument. The second optional argument is options object.
+
+```javascript
+var mymap = L.map('mapid').setView([51.505, -0.09], 1);
+L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 18
+}).addTo(mymap);
+
+var pointList = [new L.LatLng(20.00, 140.0), L.LatLng(50.00, -120.0), L.LatLng(70.50, 170.0)];
+
+//Create and display a wrapping polygon.
+new L.Wrapped.Polygon(pointList, {
+    color: 'red',
+    weight: 3,
+    opacity: 0.5,
+    smoothFactor: 1,
+    noWrap:true
+  }).addTo(mymap);
+
+//Create and display a wrapping polyline over the same set of points.
+  new L.Wrapped.Polyline(pointList, {
+    color: 'blue',
+    weight: 3,
+    opacity: 0.5,
+    smoothFactor: 1,
+    noWrap:true
+    }).addTo(mymap);
+});
+```
 ## API reference
 ### Factorys
 Factory|Description
