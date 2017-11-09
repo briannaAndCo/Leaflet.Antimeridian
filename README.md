@@ -25,6 +25,7 @@ It may also be downloaded as an NPM project, complete with tests and examples.
 To download the source file and include in the the project, run:
 ```
 git clone https://github.com/briannaAndCo/Leaflet.Antimeridian.git
+cd Leaflet.Antimeridian
 git checkout v1.0.0
 ```
 A folder named `dist` will appear, with the file `leaflet.antimeridian-src.js` inside it. Include that folder in your index.html file using the paths below.
@@ -32,6 +33,28 @@ A folder named `dist` will appear, with the file `leaflet.antimeridian-src.js` i
 ```html
 <script src="path/to/leaflet@1.0.2/dist/leaflet.js"></script>
 <script src="path/to/leaflet.antimeridian-src.js"></script>
+```
+
+### Download Source and Compile
+
+If you would like to download and compile the source, clone the repository as above. Then checkout `master` instead of `v1.0.0`.
+
+Then follow the steps below to build the source.
+
+```javascript
+npm install \\Will install the npm dependancies, including leaflet.
+jake test \\Run the tests
+npm run rollup \\This will generate the leaflet.antimeridian-src.js file
+```
+Include the generated file the same way as the above method.
+
+### Examples
+To run the examples, first download and compile the source.
+
+Then open the example files in your browser. They should be in the form:
+
+```
+file:///path/to/examples/Leaflet.Antimeridian/examples/Wrapped.Polygon.html
 ```
 
 ## Usage
