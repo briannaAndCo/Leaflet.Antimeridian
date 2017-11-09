@@ -30,7 +30,7 @@ L.wrappedPolygon(`LatLng[]` _latlngs_, `options` _options?_)|Factory method that
 ### Methods
 Utility Methods
 ------|-------|-----------
-L.Wrapped.sign(`Number` _number_)|Returns NaN for non-numbers, 0 for 0, -1 for negative numbers, 1 for positive numbers
+L.Wrapped.sign(`Number` _number_)|`Number`|Returns NaN for non-numbers, 0 for 0, -1 for negative numbers, 1 for positive numbers
 L.Wrapped.calculateAntimeridianLat(`LatLng` _latLngA_, `LatLng` _latLngB_)|`Number`|Calculates the latitude at which the two points will cross the Antimeridian. Returns the latitude.
 L.Wrapped.isCrossMeridian(`LatLng` _latLngA_, `LatLng` _latLngB_)|`boolean`|Returns true if the line between the two LatLngs crosses either meridian.
 L.Wrapped.isBreakRing(`LatLng` _latLngA_, `LatLng` _latLngB_)|`boolean`|Returns true if the line between the two LatLngs should be broken across the meridian.
