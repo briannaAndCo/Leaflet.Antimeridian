@@ -20,22 +20,17 @@ Requires leaflet@1.0.0.
 
 ## API reference
 ### Factorys
-Polylines
 Factory|Description
 ------|-------
 L.Wrapped.Polyline(`LatLng[]` _latlngs_, `options` _options?_)|Create a automatically wrapping polyline that will take all the usual polygon options.
 L.wrappedPolyline(`LatLng[]` _latlngs_, `options` _options?_)|Factory method that wraps the L.Wrapped.Polyline constructor.
-
-Polygons
-Factory|Description
-------|-------
 L.Wrapped.Polygon(`LatLng[]` _latlngs_, `options` _options?_)|Create a automatically wrapping polygon that will take all the usual polygon options.
 L.wrappedPolygon(`LatLng[]` _latlngs_, `options` _options?_)|Factory method that wraps the L.Wrapped.Polygon constructor.
 
 ### Methods
 Utility Methods
 ------|-------|-----------
-L.Wrapped.sign(`Number` _number_)|Returns NaN for non-numbers, 0 for 0, -1 for negative numbers, 1 for positive numbers|
+L.Wrapped.sign(`Number` _number_)|Returns NaN for non-numbers, 0 for 0, -1 for negative numbers, 1 for positive numbers
 L.Wrapped.calculateAntimeridianLat(`LatLng` _latLngA_, `LatLng` _latLngB_)|`Number`|Calculates the latitude at which the two points will cross the Antimeridian. Returns the latitude.
 L.Wrapped.isCrossMeridian(`LatLng` _latLngA_, `LatLng` _latLngB_)|`boolean`|Returns true if the line between the two LatLngs crosses either meridian.
 L.Wrapped.isBreakRing(`LatLng` _latLngA_, `LatLng` _latLngB_)|`boolean`|Returns true if the line between the two LatLngs should be broken across the meridian.
