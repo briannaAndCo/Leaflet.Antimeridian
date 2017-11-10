@@ -88,7 +88,7 @@ new L.Wrapped.Polygon(pointList, {
 });
 ```
 ## API reference
-### Factorys
+### Factories
 Factory|Description
 ------|-------
 L.Wrapped.Polyline(`LatLng[]` _latlngs_, `options` _options?_)|Create a automatically wrapping polyline that will take all the usual polyline options.

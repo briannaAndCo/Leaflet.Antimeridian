@@ -1,4 +1,4 @@
-import * as LineUtils from './Wrapped.LineUtils';
+import * as AntimeridianUtils from './Wrapped.AntimeridianUtils';
 /*
  * @namespace L.Wrapped
  * A polygon that will automatically split and wrap around the Antimeridian (Internation Date Line).
@@ -6,10 +6,12 @@ import * as LineUtils from './Wrapped.LineUtils';
 export var Polygon = L.Polygon.extend({
 
 	// recursively turns latlngs into a set of rings with projected coordinates
+	// This is the entrypoint that is called from the overriden class to change
+	// the rendering.
 	_projectLatlngs: function (latlngs, result, projectedBounds) {
-		var flat = latlngs[0] instanceof L.LatLng;
+		var isMultiRing = latlngs[0] instanceof L.LatLng;
 
-		if (flat) {
+		if (isMultiRing) {
 			this._createRings(latlngs, result, projectedBounds);
 		} else {
 			for (var i = 0; i < latlngs.length; i++) {
@@ -26,12 +28,13 @@ export var Polygon = L.Polygon.extend({
 		for (var i = 0; i < len; i++) {
 			// Because this is a polygon, there will always be a comparison latlng
 			var compareLatLng = this._getCompareLatLng(i, len, latlngs);
+			var currentLatLng = latlngs[i];
 
-			LineUtils.pushLatLng(rings[rings.length - 1], projectedBounds, latlngs[i], this._map);
+			AntimeridianUtils.pushLatLng(rings[rings.length - 1], projectedBounds, currentLatLng, this._map);
 
 			// Check to see if the ring should be broken.
-			if (LineUtils.isBreakRing(compareLatLng, latlngs[i])) {
-				var secondMeridianLatLng = LineUtils.breakRing(latlngs[i], compareLatLng,
+			if (AntimeridianUtils.isBreakRing(compareLatLng, currentLatLng)) {
+				var secondMeridianLatLng = AntimeridianUtils.breakRing(currentLatLng, compareLatLng,
 					rings, projectedBounds, this._map);
 
 				this._startNextRing(rings, projectedBounds, secondMeridianLatLng, i === len - 1);
@@ -49,7 +52,7 @@ export var Polygon = L.Polygon.extend({
 		if (!isLastLatLng) {
 			ring = [];
 			rings.push(ring);
-			LineUtils.pushLatLng(ring, projectedBounds, secondMeridianLatLng, this._map);
+			AntimeridianUtils.pushLatLng(ring, projectedBounds, secondMeridianLatLng, this._map);
 		} else {
 			// If this is the last latlng, don't bother starting a new ring.
 			// instead, join the last meridian point to the first point, to connect
@@ -65,17 +68,17 @@ export var Polygon = L.Polygon.extend({
 		return (i + 1 < len) ? latlngs[i + 1] : latlngs[0];
 	},
 
-	// Joins the last ring to the first if they were accidently disconnected by
+	// Joins the last ring to the first if they were accidentally disconnected by
 	// crossing the anti-meridian
 	_joinLastRing: function (rings, latlngs) {
 		var firstRing = rings[0];
 		var lastRing = rings[rings.length - 1];
 
-		// If both either the first or last latlng cross the meridian immediately, then
-		// they have accidently been split by turning one ring into mulitiple.
-		// Rejoin them.
+		// If either the first or last latlng cross the meridian immediately, then
+		// they will be drawn as a single line, not a polygon, since they will not be
+		// connected to the last ring. Reconnect them.
 		if (rings.length > 1 && (firstRing.length === 2 || lastRing.length === 2) &&
-			 !LineUtils.isCrossMeridian(latlngs[0], latlngs[latlngs.length - 1])) {
+			 !AntimeridianUtils.isCrossMeridian(latlngs[0], latlngs[latlngs.length - 1])) {
 			var len = lastRing.length;
 			for (var i = 0; i < len; i++) {
 				firstRing.unshift(lastRing.pop());

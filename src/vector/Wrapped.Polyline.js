@@ -1,4 +1,4 @@
-import * as LineUtils from './Wrapped.LineUtils';
+import * as AntimeridianUtils from './Wrapped.AntimeridianUtils';
 
 /*
  * @namespace L.Wrapped
@@ -7,10 +7,12 @@ import * as LineUtils from './Wrapped.LineUtils';
 export var Polyline = L.Polyline.extend({
 
 	// recursively turns latlngs into a set of rings with projected coordinates
+	// This is the entrypoint that is called from the overriden class to change
+	// the rendering.
 	_projectLatlngs: function (latlngs, result, projectedBounds) {
-		var flat = latlngs[0] instanceof L.LatLng;
+		var isMultiRing = latlngs[0] instanceof L.LatLng;
 
-		if (flat) {
+		if (isMultiRing) {
 			this._createRings(latlngs, result, projectedBounds);
 		} else {
 			for (var i = 0; i < latlngs.length; i++) {
@@ -26,13 +28,14 @@ export var Polyline = L.Polyline.extend({
 
 		for (var i = 0; i < len; i++) {
 			var compareLatLng = this._getCompareLatLng(i, len, latlngs);
+			var currentLatLng = latlngs[i];
 
-			LineUtils.pushLatLng(rings[rings.length - 1], projectedBounds, latlngs[i], this._map);
+			AntimeridianUtils.pushLatLng(rings[rings.length - 1], projectedBounds, latlngs[i], this._map);
 
 			// If the next point to check exists, then check to see if the
 			// ring should be broken.
-			if (compareLatLng && LineUtils.isBreakRing(compareLatLng, latlngs[i])) {
-				var secondMeridianLatLng = LineUtils.breakRing(latlngs[i], compareLatLng,
+			if (compareLatLng && AntimeridianUtils.isBreakRing(compareLatLng, currentLatLng)) {
+				var secondMeridianLatLng = AntimeridianUtils.breakRing(currentLatLng, compareLatLng,
 					rings, projectedBounds, this._map);
 
 				this._startNextRing(rings, projectedBounds, secondMeridianLatLng);
@@ -49,7 +52,7 @@ export var Polyline = L.Polyline.extend({
 	_startNextRing: function (rings, projectedBounds, secondMeridianLatLng) {
 		var ring = [];
 		rings.push(ring);
-		LineUtils.pushLatLng(ring, projectedBounds, secondMeridianLatLng, this._map);
+		AntimeridianUtils.pushLatLng(ring, projectedBounds, secondMeridianLatLng, this._map);
 	}
 });
 
