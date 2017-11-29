@@ -42,6 +42,7 @@ export var Polygon = L.Polygon.extend({
 		}
 
 		// Join the last two rings if needed.
+		this._checkConcaveRings(rings);
 		this._joinLastRing(rings, latlngs);
 	},
 
@@ -85,6 +86,31 @@ export var Polygon = L.Polygon.extend({
 			}
 			// Remove the empty ring.
 			rings.pop();
+		}
+	},
+
+	// Check for concave sections of the rings and join the rings if they are
+	// concave
+	_checkConcaveRings: function (rings) {
+		var firstLatLng = this._map.layerPointToLatLng(rings[0][0]);
+
+		for (var i = 0; i <= rings.length - 3; i++) {
+			var middleLatLng = this._map.layerPointToLatLng(rings[i + 1][0]);
+			var lastLatLng = this._map.layerPointToLatLng(rings[i + 2][0]);
+
+			// If the meridian is crossed and then is crossed again
+			// over the first polygon, the polygon is concave. Join the rings.
+			if (AntimeridianUtils.isCrossMeridian(firstLatLng, middleLatLng) &&
+			AntimeridianUtils.isCrossMeridian(middleLatLng, lastLatLng)) {
+				var firstRing = rings[0];
+				var lastRing = rings[i + 2];
+
+				var newRing = firstRing.concat(lastRing);
+
+				// Remove the joined polygon and then update the first polygon.
+				rings.splice(i + 2, 1);
+				rings.splice(0, 1, newRing);
+			}
 		}
 	}
 });

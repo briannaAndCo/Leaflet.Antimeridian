@@ -20,7 +20,7 @@
           maxZoom: 18
         }).addTo(mymap);
 
-        var pointList = [new L.LatLng(20.00, 140.0), new L.LatLng(30.00, -160.0), new L.LatLng(40.00, 160.0), new L.LatLng(50.00, -160.0), new L.LatLng(60.00, 140.0)];
+        var pointList = [new L.LatLng(20.00, 140.0), new L.LatLng(30.00, -160.0), new L.LatLng(40.00, 160.0), new L.LatLng(50.00, -160.0), new L.LatLng(55.00, -160.00), new L.LatLng(60.00, 150.00), new L.LatLng(65.00, 150.00), new L.LatLng(70.00, -160.00), new L.LatLng(80.00, 140.0)];
         var firstpolyline = new L.Wrapped.Polygon(pointList, {
             color: 'red',
             weight: 3,
@@ -37,8 +37,7 @@
             noWrap:true
         });
         secondpolyline.bindTooltip("Polygon", {'permanent': true});
-        firstpolyline.addTo(mymap);
-        secondpolyline.addTo(mymap);
+
         var pointA = new L.LatLng(90, 180.0);
         var pointB = new L.LatLng(-90, 180.0);
         var pointList = [pointA, pointB];
@@ -63,6 +62,10 @@
         });
         idl2.addTo(mymap);
         idl2.bindTooltip("-180 Internation Date Line", {'permanent': true});
+
+        // Add last so that the lines are shown over the IDL
+        firstpolyline.addTo(mymap);
+        secondpolyline.addTo(mymap);
     </script>
 </body>
 
